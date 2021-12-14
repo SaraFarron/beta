@@ -1,5 +1,7 @@
 from serial import Serial, SerialException
-from io import TextIOWrapper, BufferedRWPair
+from matplotlib import pyplot as plt
+from matplotlib.animation import FuncAnimation
+from random import random
 
 
 def main():
@@ -14,7 +16,23 @@ def main():
                 return
             data = ser.readline()
             print(data)
-            # ser.write(b'hello')
+
+
+def test_plot_generation():
+    """
+    For test purposes only
+    """
+
+    def animate(i):
+        data = [random() for _ in range(100)]
+        plt.cla()
+        plt.grid()
+        plt.plot(data)
+
+    ani = FuncAnimation(plt.gcf(), animate, interval=10)
+
+    plt.show()
 
 if __name__ == '__main__':
+    # test_plot_generation()
     main()

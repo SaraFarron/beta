@@ -95,7 +95,7 @@ int main(void)
   while (1)
   {
     CDC_Transmit_FS(buffer, sizeof(buffer));
-    HAL_Delay(1000);
+    HAL_Delay(1000);  
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
