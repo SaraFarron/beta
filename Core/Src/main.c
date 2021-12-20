@@ -64,7 +64,8 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t buffer[] = "Hello World\n";
+  uint16_t buffer = 0xABCD;
+  uint16_t *ptr = &buffer;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -94,7 +95,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    CDC_Transmit_FS(buffer, sizeof(buffer));
+
+    CDC_Transmit_FS((uint8_t*)&buffer, sizeof(buffer));
     HAL_Delay(1000);  
     /* USER CODE END WHILE */
 

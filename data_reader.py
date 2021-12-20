@@ -21,12 +21,13 @@ while True:
 
         try:
             ser.open()
+            print(ser.readline())
 
         except SerialException:
             print("Соединение потеряно или порт не был найден")
             break
         data = ser.readline()
         size = len(data)
-        ani = FuncAnimation(plt.gcf(), animate, interval=10)
+        # ani = FuncAnimation(plt.gcf(), animate, interval=10)
 
-        plt.show()
+        # plt.show()
