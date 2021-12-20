@@ -4,35 +4,29 @@ from matplotlib.animation import FuncAnimation
 from random import random
 
 
-def main():
-    while True:
-        with Serial() as ser:
-            ser.baudrate = 9600
-            ser.port = 'COM6'
-            try:
-                ser.open()
-            except SerialException:
-                print("Соединение потеряно или порт не был найден")
-                return
-            data = ser.readline()
-            print(data)
+BAUDRATE = 9600
+PORT = 'COM6'
 
 
-def test_plot_generation():
-    """
-    For test purposes only
-    """
-
-    def animate(i):
+def animate(i):
         data = [random() for _ in range(100)]
         plt.cla()
         plt.grid()
         plt.plot(data)
 
-    ani = FuncAnimation(plt.gcf(), animate, interval=10)
+while True:
+    with Serial() as ser:
+        ser.baudrate = BAUDRATE
+        ser.port = PORT
 
-    plt.show()
+        try:
+            ser.open()
 
-if __name__ == '__main__':
-    # test_plot_generation()
-    main()
+        except SerialException:
+            print("Соединение потеряно или порт не был найден")
+            break
+        data = ser.readline()
+        size = len(data)
+        ani = FuncAnimation(plt.gcf(), animate, interval=10)
+
+        plt.show()
